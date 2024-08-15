@@ -2,7 +2,8 @@ function DealerList(props) {
   return (
     <div>
       <h1>Motor Dealers</h1>
-      <ul style={{
+      <ul
+        style={{
           listStyle: "none",
           padding: 0,
           margin: 0,

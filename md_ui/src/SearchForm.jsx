@@ -1,23 +1,34 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function SearchForm(params) {
-  const cities = [
-    {value: "London", label: "London"},
-    {value: "Bangkok", label: "Bangkok"},
-    {value: "New York", label: "New York"},
-  ];
+  const api = import.meta.env.VITE_API;
+  const [cities, setCities] = useState([]);
+  useEffect(() => {
+    fetch(`${api}/dealers/cities`)
+      .then((res) => res.json())
+      .then((data) =>
+        setCities(
+          data["cities"].map((city) => ({
+            value: city["name"],
+            label: city["name"],
+          }))
+        )
+      );
+  }, []);
   const [selectedOptions, setSelectedOptions] = useState([]);
   return (
-    <div style={{
-        position: 'fixed',
-        top: '0px',
-        left: '0px',
-        width: '400px',
+    <div
+      style={{
+        position: "fixed",
+        top: "0px",
+        left: "0px",
+        width: "400px",
       }}
     >
       <h1>Search</h1>
-      <div style={{
+      <div
+        style={{
           display: "flex",
           flexDirection: "column",
           gap: 3,
@@ -27,7 +38,7 @@ function SearchForm(params) {
         }}
       >
         <label>Name</label> <br />
-        <input type="text" /> <br />
+        <input type="text" style={{ height: "35px" }} /> <br />
         <label>City</label> <br />
         <Select
           options={cities}
@@ -40,7 +51,10 @@ function SearchForm(params) {
           isMulti={true}
         />
         <button
-          onClick={(e) => {console.log("final cities", selectedOptions)}}
+          style={{ height: "35px", marginTop: "10px" }}
+          onClick={() => {
+            console.log("final cities", selectedOptions);
+          }}
         >
           Search
         </button>

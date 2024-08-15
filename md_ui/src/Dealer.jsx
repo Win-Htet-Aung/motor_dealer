@@ -25,11 +25,7 @@ function Dealer({
             paddingTop: "10px",
           }}
         >
-          <img
-            src={logo}
-            width="64px"
-            height="64px"
-          />
+          <img src={logo} width="64px" height="64px" />
           <div
             style={{
               lineHeight: 0.5,
@@ -63,7 +59,9 @@ function Dealer({
             }}
           >
             <i>{email}</i>
-            <p>{rating_score} ({rating_count})</p>
+            <p>
+              {rating_score} ({rating_count})
+            </p>
           </div>
         </div>
       </div>
