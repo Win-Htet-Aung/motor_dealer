@@ -12,7 +12,7 @@ function Dealer({
     <li>
       <div
         style={{
-          width: "500px",
+          width: "550px",
           borderBottom: "1px solid #ddd",
         }}
       >

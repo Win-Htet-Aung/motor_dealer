@@ -21,7 +21,7 @@ function App() {
         justifyContent: "space-around",
       }}
     >
-      <SearchForm />
+      <SearchForm setDealers={setDealers} />
       {
         dealers.length === 0 ?
         <Loader isLoading={dealers.length === 0} /> :

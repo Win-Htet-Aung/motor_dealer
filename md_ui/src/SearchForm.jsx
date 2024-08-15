@@ -1,9 +1,13 @@
 import Select from "react-select";
 import { useState, useEffect } from "react";
 
-function SearchForm(params) {
+function SearchForm({setDealers}) {
   const api = import.meta.env.VITE_API;
   const [cities, setCities] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const handleNameChange = (event) => {
+    setSearchName(event.target.value);
+  };
   useEffect(() => {
     fetch(`${api}/dealers/cities`)
       .then((res) => res.json())
@@ -17,6 +21,13 @@ function SearchForm(params) {
       );
   }, []);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const search = (name, selectedCities) => {
+    let cities = selectedCities.map((city) => city.value).join(",").replaceAll(" ", "+");
+    const url = `${api}/dealers?search=${name}&cities=${cities}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setDealers(data["results"]));
+  }
   return (
     <div
       style={{
@@ -38,22 +49,26 @@ function SearchForm(params) {
         }}
       >
         <label>Name</label> <br />
-        <input type="text" style={{ height: "35px" }} /> <br />
+        <input type="text" style={{ height: "35px", paddingLeft: "10px" }}
+          value={searchName}
+          placeholder="Name"
+          onChange={handleNameChange}
+        /> <br />
         <label>City</label> <br />
         <Select
           options={cities}
           value={selectedOptions}
           onChange={(selectedItems) => {
             setSelectedOptions(selectedItems);
-            console.log("selected ", selectedItems);
-            console.log("current state", selectedOptions);
           }}
           isMulti={true}
         />
         <button
           style={{ height: "35px", marginTop: "10px" }}
           onClick={() => {
-            console.log("final cities", selectedOptions);
+            search(searchName, selectedOptions);
+            setSearchName("");
+            setSelectedOptions([]);
           }}
         >
           Search

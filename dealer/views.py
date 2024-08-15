@@ -17,7 +17,7 @@ class DealerView(ListAPIView):
         if size:
             self.pagination_class.page_size = int(size)
         else:
-            self.pagination_class.page_size = 10
+            self.pagination_class.page_size = 5
         queryset = Dealer.objects.filter(name__icontains=search.replace("+", " ") if search else "")
         if cities:
             queryset = queryset.filter(city__in=cities.replace("+", " ").split(","))
