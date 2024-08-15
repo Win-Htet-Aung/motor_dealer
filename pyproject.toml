@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "motor-dealer"
+version = "0.1.0"
+description = ""
+authors = ["Win Htet Aung <whaung1998@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^5.1"
+faker = "^27.0.0"
+pillow = "^10.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
