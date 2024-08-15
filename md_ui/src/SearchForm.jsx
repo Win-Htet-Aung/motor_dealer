@@ -1,4 +1,13 @@
+import Select from "react-select";
+import { useState } from "react";
+
 function SearchForm(params) {
+  const cities = [
+    {value: "London", label: "London"},
+    {value: "Bangkok", label: "Bangkok"},
+    {value: "New York", label: "New York"},
+  ];
+  const [selectedOptions, setSelectedOptions] = useState([]);
   return (
     <div style={{
         position: 'fixed',
@@ -8,7 +17,7 @@ function SearchForm(params) {
       }}
     >
       <h1>Search</h1>
-      <form action="" style={{
+      <div style={{
           display: "flex",
           flexDirection: "column",
           gap: 3,
@@ -20,13 +29,22 @@ function SearchForm(params) {
         <label>Name</label> <br />
         <input type="text" /> <br />
         <label>City</label> <br />
-        <select name="city">
-          <option value="london">London</option>
-          <option value="newyork">New York</option>
-          <option value="paris">Paris</option>
-        </select> <br />
-        <button>Search</button>
-      </form>
+        <Select
+          options={cities}
+          value={selectedOptions}
+          onChange={(selectedItems) => {
+            setSelectedOptions(selectedItems);
+            console.log("selected ", selectedItems);
+            console.log("current state", selectedOptions);
+          }}
+          isMulti={true}
+        />
+        <button
+          onClick={(e) => {console.log("final cities", selectedOptions)}}
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 }

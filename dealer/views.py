@@ -1,4 +1,6 @@
+import json
 from rest_framework.generics import ListAPIView
+from django.http import HttpResponse
 from .models import Dealer
 from .serializers import DealerSerializer
 from .paginations import CustomCursorPagination
@@ -20,4 +22,11 @@ class DealerView(ListAPIView):
         if cities:
             queryset = queryset.filter(city__in=cities.replace("+", " ").split(","))
         return queryset
-        
+
+
+def city_view(request):
+    cities = Dealer.objects.values_list("city", flat=True).distinct()
+    response_data = {"cities": [
+        {"name": city} for city in cities
+    ]}
+    return HttpResponse(content=json.dumps(response_data), content_type="application/json", status=200)
