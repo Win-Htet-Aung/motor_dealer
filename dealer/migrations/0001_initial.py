@@ -7,23 +7,30 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Dealer',
+            name="Dealer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, max_length=200)),
-                ('liscene_number', models.CharField(max_length=200)),
-                ('status', models.CharField(max_length=200)),
-                ('logo', models.ImageField(upload_to='dearler/')),
-                ('email', models.EmailField(max_length=254)),
-                ('rating_score', models.DecimalField(decimal_places=2, max_digits=3)),
-                ('rating_count', models.IntegerField()),
-                ('popularity', models.IntegerField()),
-                ('city', models.CharField(db_index=True, max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(db_index=True, max_length=200)),
+                ("liscene_number", models.CharField(max_length=200)),
+                ("status", models.CharField(max_length=200)),
+                ("logo", models.ImageField(upload_to="dearler/")),
+                ("email", models.EmailField(max_length=254)),
+                ("rating_score", models.DecimalField(decimal_places=2, max_digits=3)),
+                ("rating_count", models.IntegerField()),
+                ("popularity", models.IntegerField()),
+                ("city", models.CharField(db_index=True, max_length=200)),
             ],
         ),
     ]

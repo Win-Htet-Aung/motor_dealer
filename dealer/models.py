@@ -7,7 +7,7 @@ class Dealer(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     liscene_number = models.CharField(max_length=200)
     status = models.CharField(max_length=200)
-    logo = models.ImageField(upload_to='dealers/')
+    logo = models.ImageField(upload_to="dealers/")
     email = models.EmailField()
     rating_score = models.DecimalField(max_digits=3, decimal_places=2)
     rating_count = models.IntegerField()
