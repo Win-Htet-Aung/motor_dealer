@@ -7,6 +7,8 @@ import Loader from "./Loader";
 
 function App() {
   const api = import.meta.env.VITE_API;
+  const token = import.meta.env.VITE_API_TOKEN;
+  const headers = {"Authorization": `Token ${token}`};
   const [dealers, setDealers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [next, setNext] = useState(null);
@@ -15,7 +17,7 @@ function App() {
     if (isLoading) return;
     console.log("fetching more", next);
     setIsLoading(true);
-    fetch(next)
+    fetch(next, {headers})
       .then(res => res.json())
       .then(data => {
         setDealers((prevDealers) => [...prevDealers, ...data["results"]])
@@ -28,7 +30,7 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
-      fetch(`${api}/dealers`)
+      fetch(`${api}/dealers`, {headers})
         .then(res => res.json())
         .then(data => {
           setDealers(data["results"]);

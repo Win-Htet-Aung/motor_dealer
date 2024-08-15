@@ -3,13 +3,15 @@ import { useState, useEffect } from "react";
 
 function SearchForm({setDealers, setNext}) {
   const api = import.meta.env.VITE_API;
+  const token = import.meta.env.VITE_API_TOKEN;
+  const headers = {"Authorization": `Token ${token}`};
   const [cities, setCities] = useState([]);
   const [searchName, setSearchName] = useState("");
   const handleNameChange = (event) => {
     setSearchName(event.target.value);
   };
   useEffect(() => {
-    fetch(`${api}/dealers/cities`)
+    fetch(`${api}/dealers/cities`, {headers})
       .then((res) => res.json())
       .then((data) =>
         setCities(
@@ -24,7 +26,7 @@ function SearchForm({setDealers, setNext}) {
   const search = (name, selectedCities) => {
     let cities = selectedCities.map((city) => city.value).join(",").replaceAll(" ", "+");
     const url = `${api}/dealers?search=${name}&cities=${cities}`;
-    fetch(url)
+    fetch(url, {headers})
       .then((res) => res.json())
       .then((data) => {
         setDealers(data["results"]);
