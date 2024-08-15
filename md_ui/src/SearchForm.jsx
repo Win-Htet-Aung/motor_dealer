@@ -1,7 +1,7 @@
 import Select from "react-select";
 import { useState, useEffect } from "react";
 
-function SearchForm({setDealers}) {
+function SearchForm({setDealers, setNext}) {
   const api = import.meta.env.VITE_API;
   const [cities, setCities] = useState([]);
   const [searchName, setSearchName] = useState("");
@@ -26,7 +26,10 @@ function SearchForm({setDealers}) {
     const url = `${api}/dealers?search=${name}&cities=${cities}`;
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setDealers(data["results"]));
+      .then((data) => {
+        setDealers(data["results"]);
+        setNext(data["next"]);
+      });
   }
   return (
     <div
