@@ -19,4 +19,4 @@ COPY . .
 # migrations
 RUN python manage.py migrate
 
-EXPOSE 5173
+EXPOSE 8000
