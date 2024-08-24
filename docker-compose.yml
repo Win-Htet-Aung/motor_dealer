@@ -8,4 +8,4 @@ services:
     build: ./md_ui
     command: npm run dev
     ports:
-      - 3000:5173
+      - 3000:3000
